@@ -17,10 +17,13 @@ Including another URLconf
 """
 
 # Uncomment next two lines to enable admin:
-#from django.contrib import admin
-#from django.urls import path
+from django.contrib import admin
+from django.urls import path
+from django.conf.urls import include, url
+import LetsDataCentreMonitoringApp.views
 
 urlpatterns = [
     # Uncomment the next line to enable the admin:
-    #path('admin/', admin.site.urls)
+    url(r'^$', LetsDataCentreMonitoringApp.views.index, name='index'),
+    url(r'^home$', LetsDataCentreMonitoringApp.views.index, name='home'),
 ]
