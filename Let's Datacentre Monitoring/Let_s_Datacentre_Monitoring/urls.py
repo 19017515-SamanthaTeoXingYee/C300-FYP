@@ -26,4 +26,5 @@ urlpatterns = [
     # Uncomment the next line to enable the admin:
     url(r'^$', LetsDataCentreMonitoringApp.views.index, name='index'),
     url(r'^home$', LetsDataCentreMonitoringApp.views.index, name='home'),
+    url(r'^about$', LetsDataCentreMonitoringApp.views.index, name='about'),
 ]

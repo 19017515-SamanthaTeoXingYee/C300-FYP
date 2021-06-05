@@ -45,12 +45,16 @@
     <Compile Include="Let_s_Datacentre_Monitoring\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="LetsDataCentreMonitoringApp\static\site.css" />
+    <Content Include="LetsDataCentreMonitoringApp\templates\LetsDataCentreMonitoringApp\about.html" />
     <Content Include="LetsDataCentreMonitoringApp\templates\LetsDataCentreMonitoringApp\index.html" />
+    <Content Include="LetsDataCentreMonitoringApp\templates\LetsDataCentreMonitoringApp\layout.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LetsDataCentreMonitoringApp\" />
     <Folder Include="LetsDataCentreMonitoringApp\migrations\" />
+    <Folder Include="LetsDataCentreMonitoringApp\static\" />
     <Folder Include="LetsDataCentreMonitoringApp\templates\" />
     <Folder Include="LetsDataCentreMonitoringApp\templates\LetsDataCentreMonitoringApp\" />
     <Folder Include="Let_s_Datacentre_Monitoring\" />

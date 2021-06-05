@@ -11,11 +11,10 @@ def index(request):
 
     return render(
         request,
-        "LetsDataCentreMonitoringApp/index.html",  # Relative path from the 'templates' folder to the template file
+        "LetsDataCentreMonitoringApp/about.html",  # Relative path from the 'templates' folder to the template file
         # "index.html", # Use this code for VS 2017 15.7 and earlier
         {
-            'title' : "Hello Django",
-            'message' : "Hello Django!",
-            'content' : " on " + now.strftime("%A, %d %B, %Y at %X")
+            'title' : "About LetsDataCentreMonitoringApp",
+            'content' : "Example app page for Django."
         }
     )
