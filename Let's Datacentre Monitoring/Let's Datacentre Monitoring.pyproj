@@ -4,6 +4,7 @@
     <Name>Let's Datacentre Monitoring</Name>
     <RootNamespace>Let's Datacentre Monitoring</RootNamespace>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
