@@ -1,0 +1,12 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}.</h2>
+<h3>{{ message }}</h3>
+
+{% if chart %}
+<img src="data:image/png;base64, {{chart|safe}}" />
+
+{% endif %}
+{% endblock %}
