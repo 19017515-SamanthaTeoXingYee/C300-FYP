@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - Let's! Datacentre Monitoring</title>
+    <title>Let's! {{title}}</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
@@ -27,6 +27,9 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'contact' %}">Contact</a></li>
                     <li><a href="{% url 'statisticsobservation' %}">Statistics Observation</a></li>
+                    <li><a href="{% url 'slamanagement' %}">SLA Management</a></li>
+                    <li><a href="{% url 'fipyaddition' %}">Add Fipy</a></li>
+                    <li><a href="{% url 'fipydeletion' %}">Delete Fipy</a></li>
                 </ul>
                 {% include 'app/loginpartial.html' %}
             </div>

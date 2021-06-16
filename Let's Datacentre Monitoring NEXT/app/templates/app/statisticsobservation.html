@@ -2,11 +2,17 @@
 
 {% block content %}
 
-<h2>{{ title }}.</h2>
+<h2>Let's! {{ title }}</h2>
 <h3>{{ message }}</h3>
 
 {% if chart %}
 <img src="data:image/png;base64, {{chart|safe}}" />
 
+<h3> The <bold>Humidity</bold> is presently at (humidity level). </h3>
 {% endif %}
+
+<a class="btn btn-default" href={% url 'reportprint' %} role="button">Link</a>
+
+
+
 {% endblock %}

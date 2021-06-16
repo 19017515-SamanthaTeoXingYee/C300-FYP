@@ -7,3 +7,10 @@ class App(models.Model):
 
     def __str__(self):
         return str(self.item)
+
+class Post(models.Model):
+   post_heading = models.CharField(max_length=200)
+   post_text = models.TextField()
+   
+   def __str__(self):
+      return unicode(self.post_heading)
