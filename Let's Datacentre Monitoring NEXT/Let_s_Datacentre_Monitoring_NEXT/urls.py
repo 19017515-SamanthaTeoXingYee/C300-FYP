@@ -6,6 +6,7 @@ from datetime import datetime
 from django.urls import path
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
+from django_pdfkit import PDFView
 from app import forms, views
 
 
@@ -16,7 +17,7 @@ urlpatterns = [
     path('slamanagement/',views.slamanagement, name='slamanagement'),
     path('fipyaddition/',views.fipyaddition, name='fipyaddition'),
     path('fipydeletion/',views.fipydeletion, name='fipydeletion'),
-    path('fipyslaoperation',views.fipyslaoperation, name='fipyslaoperation'),
+    path('fipyslaoperation/',views.fipyslaoperation, name='fipyslaoperation'),
     path('statisticsobservation/', views.statisticsobservation, name='statisticsobservation'),
     path('reportprint/', views.reportprint, name='reportprint'),
     path('login/',

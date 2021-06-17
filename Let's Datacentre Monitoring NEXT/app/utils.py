@@ -8,15 +8,15 @@ from django.http import HttpResponse
 from playsound import playsound
 from io import BytesIO
 from datetime import datetime
+from app import views
 
-def generatepdf():
+def generatepdf(request):
     filename = 'ldm_report_' + str(datetime.now().year) + '-' + str(datetime.now().month) + '-' + str(datetime.now().day) + '_' + str(datetime.now().hour) + ':' + str(datetime.now().minute)
     config = pdfkit.configuration(wkhtmltopdf='app\\utils\\wkhtmltopdf.exe')
-    with open('app\\templates\\app\\reportprint.html') as f:
-       pdfkit.from_file(f, filename + '.pdf', configuration=config)
-    file = open(filename + '.pdf', 'rb')
-    response = HttpResponse(pdf, content_type = 'application/pdf')
-    response['Content-Disposition'] = 'attachment;filename="test.pdf"'
+    projectPath = 'app\\templates\\app\\reportprint.html'
+    pdf = pdfkit.from_file(projectPath, filename + '.pdf', configuration=config)
+    response = HttpResponse(pdf, content_type ='application/pdf')
+    # response['Content-Disposition'] = 'attachment; filename="test.pdf"'
     
     return response
 

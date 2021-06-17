@@ -1,6 +1,12 @@
 """
 Definition of views.
 """
+import pdfkit
+
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django.template.loader import get_template 
 
 from datetime import datetime
 from django.shortcuts import render
@@ -11,6 +17,8 @@ from .utils import get_plot
 from .utils import kininarimasu
 from .utils import generatepdf
 from django.contrib.auth.decorators import login_required
+
+
 
 def home(request):
     """Renders the home page."""
@@ -126,4 +134,11 @@ def fipyslaoperation(request):
 
 @login_required(login_url='/login/')
 def reportprint(request):
-    return HttpResponse(generatepdf())
+    filename = 'ldm_report_' + str(datetime.now().year) + '-' + str(datetime.now().month) + '-' + str(datetime.now().day) + '_' + str(datetime.now().hour) + ':' + str(datetime.now().minute)
+    config = pdfkit.configuration(wkhtmltopdf='app\\utils\\wkhtmltopdf.exe')
+    projectPath = 'app\\templates\\app\\reportprint.html'
+    pdf = pdfkit.from_file(projectPath, False, configuration=config)
+    response = HttpResponse(pdf, content_type ='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '.pdf"'
+    kininarimasu()
+    return response
