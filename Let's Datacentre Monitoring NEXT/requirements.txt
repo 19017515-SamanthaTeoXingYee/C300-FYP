@@ -1,6 +1,0 @@
-django~=2.2
-matplotlib
-playsound
-seaborn
-pdfkit
-django-pdfkit
