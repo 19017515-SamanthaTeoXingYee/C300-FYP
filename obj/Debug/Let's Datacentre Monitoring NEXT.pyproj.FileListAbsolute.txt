@@ -1,2 +1,0 @@
-C:\Users\19045168\source\repos\19017515-SamanthaTeoXingYee\C300-FYP\obj\Debug\Let's Datacentre Monitoring NEXT.pyproj.CoreCompileInputs.cache
-C:\Users\19045168\Source\Repos\19017515-SamanthaTeoXingYee\C300-FYP\Let's Datacentre Monitoring NEXT\obj\Debug\Let's Datacentre Monitoring NEXT.pyproj.CoreCompileInputs.cache

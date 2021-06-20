@@ -25,7 +25,7 @@ SECRET_KEY = '3f4a6324-8ae0-4a9d-a282-24bab0f8f971'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'letsdatacentremonitoringnext.azurewebsites.net']
 
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS

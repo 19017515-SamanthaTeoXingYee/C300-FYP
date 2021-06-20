@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Let_s_Datacentre_Monitoring_NEXT"
+    "\\.github",
+    "\\.github\\workflows"
   ],
-  "SelectedNode": "\\Let_s_Datacentre_Monitoring_NEXT\\settings.py",
+  "SelectedNode": "\\manage.py",
   "PreviewInSolutionExplorer": false
 }

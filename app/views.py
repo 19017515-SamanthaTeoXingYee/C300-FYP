@@ -1,12 +1,15 @@
 """
 Definition of views.
 """
+import os
 import pdfkit
 
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.template.loader import get_template 
+from django.template.loader import get_template
+from django.template.loader import render_to_string
+from django.template import Context
 
 from datetime import datetime
 from django.shortcuts import render
@@ -154,3 +157,21 @@ def reportprint(request):
     response = HttpResponse(pdf, content_type ='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="' + filename + '.pdf"'
     return response
+
+@login_required(login_url='/login/')
+def reportprintno(request):
+    x = 5
+    y = 5
+    data = [('chart',get_plot(x,y)),('title','Fipy or SLA Operation'),('message','Successful Fipy or SLA Operation!'),('year',datetime.now().year)]
+    filename = 'ldm_report_' + str(datetime.now().year) + '-' + str(datetime.now().month) + '-' + str(datetime.now().day) + '_' + str(datetime.now().hour) + ':' + str(datetime.now().minute)
+    config = pdfkit.configuration(wkhtmltopdf='app\\utils\\wkhtmltopdf.exe')
+    template = get_template('app\\reportprint.html')
+    html = template.render(data)
+    pdfkit.from_string(html, filename + '.pdf', configuration=config)
+    pdf = open(filename + '.pdf', encoding='utf-8')
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '.pdf"'
+    pdf.close()
+    os.remove(filename + '.pdf')
+    return response
+

@@ -1,18 +1,22 @@
-{% extends "app/layout.html" %}
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
 
-{% block content %}
+<h1>Let's! Datacentre Monitoring</h1>
+<p>This is the report for {{ datetime }}.</p>
 
-<h2>Let's! {{ title }}</h2>
-<h3>{{ message }}</h3>
+<img src="fipy1-graph.jpg" alt="Fipy 1 temperature" width="320" height="240">
+<p>The temperature reported for Fipy 1 is <bold> {{ temperature }} </bold>. (Above is where the graph would go)</p>
+<p>The humidity for Fipy 1 is <bold> {{ humidity }} </bold>.
 
-{% if chart %}
-<img src="data:image/png;base64, {{chart|safe}}" />
+<p> (So basically there is supposed to be a for-loop for what is happening above.) </p>
 
-<h3> The <bold>Humidity</bold> is presently at (humidity level). </h3>
-{% endif %}
+<footer>
+<p>&copy; {{ year }} - Let's! Datacentre Monitoring</p>
+</footer>
 
-<a class="btn btn-default" href={% url 'reportprint' %} role="button">Link</a>
-
-
-
-{% endblock %}
+</body>
+</html> 

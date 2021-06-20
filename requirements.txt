@@ -3,4 +3,3 @@ matplotlib
 playsound
 seaborn
 pdfkit
-django-pdfkit
