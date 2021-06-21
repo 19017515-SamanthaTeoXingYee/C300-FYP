@@ -3,3 +3,4 @@ matplotlib
 playsound
 seaborn
 pdfkit
+pyodbc
