@@ -8,7 +8,8 @@
 {% if chart %}
 <img src="data:image/png;base64, {{chart|safe}}" />
 
-<h3> The <bold>Humidity</bold> is presently at (humidity level). </h3>
+<h3> The <bold>Temperature</bold> is presently at {{ latesttemperaturelevel }}. </h3>
+<h3> The <bold>Humidity</bold> is presently at {{ latesthumiditylevel }}. </h3>
 {% endif %}
 
 <a class="btn btn-default" href={% url 'reportprint' %} role="button">Link</a>
