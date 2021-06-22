@@ -38,7 +38,7 @@ def generatepdf():
     <h1>Let's! Datacentre Monitoring</h1>
     <p>This is the report for your datacentre. This information is accurate as at """ + currentdate() + """ at """ + currenttime() + """.</p>
 
-    <img src="deeznuts.png" alt="Fipy 1 temperature" width="320" height="240">
+    <img src="fipygraph.png" alt="Fipy 1 temperature" width="320" height="240">
     <p>The temperature reported for Fipy 1 is """ + get_ypointpeak() + """. (Above is where the graph would go)</p>
     <p>The humidity for Fipy 1 is <bold> ( humidity ) </bold>.
     
@@ -66,7 +66,7 @@ def get_graphwithbase64():
 
 def get_graph():
     buffer = BytesIO()
-    graph = plt.savefig('deeznuts.png')
+    graph = plt.savefig('fipygraph.png')
     return graph
 
 def get_slaabove():
