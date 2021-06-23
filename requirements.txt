@@ -4,3 +4,4 @@ playsound
 seaborn
 pdfkit
 pyodbc
+whitenoise
