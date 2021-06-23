@@ -19,14 +19,15 @@ def currenttime():
     return currenttime
 
 def currentyear():
-    return str(datetime.now().year)
+    currentyear = str(datetime.now().year)
+    return currentyear
 
 def filename():
     filename = 'ldmreport' + currentdate() + '-' + currenttime()
     return filename
 
 def generatepdf():    
-    config = pdfkit.configuration(wkhtmltopdf='app\\utils\\wkhtmltopdf.exe')
+    config = pdfkit.configuration(wkhtmltopdf='utils\\wkhtmltopdf.exe')
     html = f"""
         <!DOCTYPE html>
     <html>
@@ -37,17 +38,17 @@ def generatepdf():
     <body>
     <h1>Let's! Datacentre Monitoring</h1>
     <p>This is the report for your datacentre. This information is accurate as at """ + currentdate() + """ at """ + currenttime() + """.</p>
-
+    <br>
     <img src="fipygraph.png" alt="Fipy 1 temperature" width="320" height="240">
     <p>The temperature reported for Fipy 1 is """ + get_ypointpeak() + """. (Above is where the graph would go)</p>
-    <p>The humidity for Fipy 1 is <bold> ( humidity ) </bold>.
-    
+    <p>The humidity for Fipy 1 is <bold> """ + get_humidity() + """ </bold>.
+    <br>
     <p> (So basically there is supposed to be a for-loop for what is happening above.) </p>
-    
+    <br>
     <footer>
-    <p>(C) """ + currentyear() + """- Let's! Datacentre Monitoring</p>
+    <p>&copy; """ + currentyear() + """ - Let's! Datacentre Monitoring</p>
     </footer>
-    
+    <br>
     </body>
     </html> 
     """
@@ -82,6 +83,10 @@ def get_slabelow():
 def get_xpoints():
     xpoints = np.array([20.0, 15.0, 10.0, 5.0, 0.0])
     return xpoints
+
+def get_humidity():
+    humidity = str(round(random.uniform(38, 42),1))
+    return humidity
 
 def get_ypoints():
     ypoint1 = round(random.uniform(20.1, 23.9), 1)

@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app"
+    "\\app",
+    "\\app\\templates",
+    "\\app\\templates\\app"
   ],
   "SelectedNode": "\\Let's Datacentre Monitoring NEXT.sln",
   "PreviewInSolutionExplorer": false

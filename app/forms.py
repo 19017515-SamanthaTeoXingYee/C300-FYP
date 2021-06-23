@@ -16,3 +16,15 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                widget=forms.PasswordInput({
                                    'class': 'form-control',
                                    'placeholder':'Password'}))
+
+
+class BootstrapFipyAdditionForm(AuthenticationForm):
+    """Authentication form which uses boostrap CSS."""
+    deviceid = forms.CharField(max_length=6,
+                               widget=forms.TextInput({
+                                   'class': 'form-control',
+                                   'placeholder': 'Device ID...'}))
+    devicename = forms.CharField(label=_("Device Name..."),
+                               widget=forms.TextInput({
+                                   'class': 'form-control',
+                                   'placeholder':'Name your device...'}))
