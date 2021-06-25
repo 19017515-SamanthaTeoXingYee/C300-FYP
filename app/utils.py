@@ -27,7 +27,8 @@ def filename():
     return filename
 
 def generatepdf():    
-    config = pdfkit.configuration(wkhtmltopdf='utils\\wkhtmltopdf.exe')
+    config = pdfkit.configuration(wkhtmltopdf='\\tmp\\8d936e742689f9f\\app\\utils\\views.py') # Note that this directory only works in Web
+    #  config = pdfkit.configuration(wkhtmltopdf='app\\utils\\views.py') # Use this if you want to test locally!
     html = f"""
         <!DOCTYPE html>
     <html>
