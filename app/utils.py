@@ -4,6 +4,8 @@ import numpy as np
 import base64
 import random
 import pdfkit
+from django.conf import settings
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from playsound import playsound
 from io import BytesIO
@@ -40,11 +42,11 @@ def generatepdf():
     <h1>Let's! Datacentre Monitoring</h1>
     <p>This is the report for your datacentre. This information is accurate as at """ + currentdate() + """ at """ + currenttime() + """.</p>
     <br>
-    <p>The temperature reported for Fipy 1 is """ + get_ypointpeak() + """. (Above is where the graph would go)</p>
+    <p>The temperature reported for Fipy 1 is """ + get_latestypoint() + """.</p>
     <p>The humidity for Fipy 1 is <bold> """ + get_humidity() + """ </bold>.
     <br>
-    <p>The current minimum temperature, as per the SLA, is """ + get_slabelow() + """.</p>
-    <p>The current maximum temperature, as per the SLA, is """ + get_slaabove() + """ </p>
+    <p>The current minimum temperature, as per the SLA, is """ + str(get_slabelowsingle()) + """.</p>
+    <p>The current maximum temperature, as per the SLA, is """ + str(get_slaabovesingle()) + """ </p>
     <br>
     <footer>
     <p>&copy; """ + currentyear() + """ - Let's! Datacentre Monitoring</p>
@@ -71,13 +73,21 @@ def get_graph():
     graph = plt.savefig('fipygraph.png')
     return graph
 
+def get_slaabovesingle():
+    slaabovesingle = 20
+    return slaabovesingle
+
 def get_slaabove():
-    slaint1 = 20
+    slaint1 = get_slaabovesingle()
     slaabove = np.array([slaint1,slaint1,slaint1,slaint1,slaint1])
     return slaabove
 
+def get_slabelowsingle():
+    slabelowsingle = 24
+    return slabelowsingle
+
 def get_slabelow():
-    slaint2 = 24
+    slaint2 = get_slabelowsingle()
     slabelow = np.array([slaint2,slaint2,slaint2,slaint2,slaint2])
     return slabelow
 
@@ -106,8 +116,27 @@ def get_ypointpeak():
         if ypointpeak <= ypointarray[controlvar]:
             ypointpeak = ypointarray[controlvar]
         controlvar = controlvar + 1
-    return str(ypointpeak)
+    return ypointpeak
 
+def get_ypointspike():
+    ypointarray = get_ypoints()
+    controlvar = 0
+    ypointspike = 100
+    for i in ypointarray:
+        if ypointspike >= ypointarray[controlvar]:
+            ypointspike = ypointarray[controlvar]
+        controlvar = controlvar + 1
+    return ypointspike
+
+def get_latestypoint():
+    ypointarray = get_ypoints()
+    latestypoint = ypointarray[4]
+    return str(latestypoint)
+
+def get_latestxpoint():
+    xpointarray = get_xpoints()
+    latestypoint = xpointarray[4]
+    return str(latestxpoint)
 
 def get_plot(x,y):
     fig = plt.figure()
@@ -130,3 +159,14 @@ def get_plot(x,y):
 
 def kininarimasu():
     playsound("app\sound\curious.wav")
+
+def get_emails():
+    emails = ['19045168@myrp.edu.sg',]
+    return emails
+
+def send_email():
+    subject = 'Notice of Temperature Levels SLA Breach'
+    message = f'Dear User, /n /n Based on the specified SLA levels of ' + str(get_slaabovesingle()) + ' and ' + str(get_slabelowsingle()) + ', we would like to inform you of the breach in your temperature levels being ' + get_latestypoint() + '. It is advised that you rectify this as soon as possible.'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = get_emails()
+    send_mail(subject, message, email_from, recipient_list )

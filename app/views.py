@@ -21,6 +21,11 @@ from .utils import kininarimasu
 from .utils import generatepdf
 from .utils import currentdate
 from .utils import currenttime
+from .utils import get_ypointpeak
+from .utils import get_ypointspike
+from .utils import get_slaabovesingle
+from .utils import get_slabelowsingle
+from .utils import send_email
 from django.contrib.auth.decorators import login_required
 
 
@@ -28,6 +33,12 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+    ypointpeak = get_ypointpeak()
+    ypointspike = get_ypointspike()
+    slaabovesingle = get_slaabovesingle()
+    slabelowsingle = get_slabelowsingle()
+    if ypointpeak > slaabovesingle or ypointspike < slabelowsingle:
+        send_email()
     return render(
         request,
         'app/index.html',
