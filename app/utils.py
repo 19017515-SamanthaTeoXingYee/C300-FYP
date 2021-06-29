@@ -29,7 +29,7 @@ def filename():
     return filename
 
 def generatepdf():    
-    config = pdfkit.configuration(wkhtmltopdf= str(settings.BASE_DIR) + '/app\\utils\\wkhtmltopdf.exe')
+    config = pdfkit.configuration(wkhtmltopdf= str(settings.BASE_DIR) + '/app/utils/wkhtmltopdf.exe')
     html = f"""
         <!DOCTYPE html>
     <html>
@@ -157,7 +157,7 @@ def get_plot(x,y):
     return graph
 
 def kininarimasu():
-    playsound("app\sound\curious.wav")
+    playsound(str(settings.BASE_DIR) + "/app/sound/curious.wav")
 
 def get_emails():
     emails = ['19045168@myrp.edu.sg',]
@@ -165,7 +165,7 @@ def get_emails():
 
 def send_email():
     subject = 'Notice of Temperature Levels SLA Breach'
-    message = f'Dear User, /n /n Based on the specified SLA levels of ' + str(get_slaabovesingle()) + ' and ' + str(get_slabelowsingle()) + ', we would like to inform you of the breach in your temperature levels being ' + get_latestypoint() + '. It is advised that you rectify this as soon as possible.'
+    message = f'Dear User, based on the specified SLA levels of ' + str(get_slaabovesingle()) + ' and ' + str(get_slabelowsingle()) + ', we would like to inform you of the breach in your temperature levels being ' + get_latestypoint() + '. It is advised that you rectify this as soon as possible.'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = get_emails()
     send_mail(subject, message, email_from, recipient_list )
