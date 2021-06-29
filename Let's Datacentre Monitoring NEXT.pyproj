@@ -69,6 +69,7 @@
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="Let_s_Datacentre_Monitoring_NEXT\" />
+    <Folder Include="static\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\fipydeletion.html" />
@@ -112,6 +113,8 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
+    <Content Include="static\web.config" />
+    <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env1\">

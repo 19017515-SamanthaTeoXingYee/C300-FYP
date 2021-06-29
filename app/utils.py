@@ -27,8 +27,8 @@ def filename():
     return filename
 
 def generatepdf():    
-    config = pdfkit.configuration(wkhtmltopdf='/tmp/8d936e742689f9f/app/utils/views.py') # Note that this directory only works in Web
-    #  config = pdfkit.configuration(wkhtmltopdf='app\\utils\\views.py') # Use this if you want to test locally!
+    # config = pdfkit.configuration(wkhtmltopdf='/tmp/8d936e742689f9f/app/utils/wkhtmltopdf.exe') # Note that this directory only works in Web
+    config = pdfkit.configuration(wkhtmltopdf='app\\utils\\wkhtmltopdf.exe') # Use this if you want to test locally!
     html = f"""
         <!DOCTYPE html>
     <html>
@@ -40,11 +40,11 @@ def generatepdf():
     <h1>Let's! Datacentre Monitoring</h1>
     <p>This is the report for your datacentre. This information is accurate as at """ + currentdate() + """ at """ + currenttime() + """.</p>
     <br>
-    <img src="fipygraph.png" alt="Fipy 1 temperature" width="320" height="240">
     <p>The temperature reported for Fipy 1 is """ + get_ypointpeak() + """. (Above is where the graph would go)</p>
     <p>The humidity for Fipy 1 is <bold> """ + get_humidity() + """ </bold>.
     <br>
-    <p> (So basically there is supposed to be a for-loop for what is happening above.) </p>
+    <p>The current minimum temperature, as per the SLA, is """ + get_slabelow() + """.</p>
+    <p>The current maximum temperature, as per the SLA, is """ + get_slaabove() + """ </p>
     <br>
     <footer>
     <p>&copy; """ + currentyear() + """ - Let's! Datacentre Monitoring</p>
