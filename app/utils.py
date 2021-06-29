@@ -29,8 +29,7 @@ def filename():
     return filename
 
 def generatepdf():    
-    # config = pdfkit.configuration(wkhtmltopdf='/tmp/8d936e742689f9f/app/utils/wkhtmltopdf.exe') # Note that this directory only works in Web
-    config = pdfkit.configuration(wkhtmltopdf='app\\utils\\wkhtmltopdf.exe') # Use this if you want to test locally!
+    config = pdfkit.configuration(wkhtmltopdf= str(settings.BASE_DIR) + '/app\\utils\\wkhtmltopdf.exe')
     html = f"""
         <!DOCTYPE html>
     <html>
