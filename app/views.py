@@ -21,6 +21,8 @@ from .utils import kininarimasu
 from .utils import generatepdf
 from .utils import currentdate
 from .utils import currenttime
+from .utils import get_humidity
+from .utils import get_latestypoint
 from .utils import get_ypointpeak
 from .utils import get_ypointspike
 from .utils import get_slaabovesingle
@@ -37,6 +39,7 @@ def home(request):
     ypointspike = get_ypointspike()
     slaabovesingle = get_slaabovesingle()
     slabelowsingle = get_slabelowsingle()
+
     if ypointpeak > slaabovesingle or ypointspike < slabelowsingle:
         send_email()
     return render(
@@ -80,6 +83,8 @@ def statisticsobservation(request):
     assert isinstance(request, HttpRequest)
     x = 5
     y = 5
+    latesttemperaturelevel = get_latestypoint()
+    latesthumiditylevel = get_humidity()
     chart = get_plot(x,y)
     return render(
         request,
@@ -88,6 +93,8 @@ def statisticsobservation(request):
             'title':'Statistics Observation',
             'message':'Observe our datacentre\'s temperature!', 
             'chart': chart,
+            'latesttemperaturelevel':latesttemperaturelevel,
+            'latesthumiditylevel':latesthumiditylevel,
             'year':datetime.now().year,
         }
     )

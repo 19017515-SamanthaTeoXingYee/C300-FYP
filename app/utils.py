@@ -29,7 +29,7 @@ def filename():
     return filename
 
 def generatepdf():    
-    config = pdfkit.configuration(wkhtmltopdf= str(settings.BASE_DIR) + '/app/utils/wkhtmltopdf.exe')
+    config = pdfkit.configuration(wkhtmltopdf= str(settings.BASE_DIR) + '/app/util2/wkhtmltopdf.exe')
     html = f"""
         <!DOCTYPE html>
     <html>
@@ -73,7 +73,7 @@ def get_graph():
     return graph
 
 def get_slaabovesingle():
-    slaabovesingle = 20
+    slaabovesingle = 24
     return slaabovesingle
 
 def get_slaabove():
@@ -82,7 +82,7 @@ def get_slaabove():
     return slaabove
 
 def get_slabelowsingle():
-    slabelowsingle = 24
+    slabelowsingle = 20
     return slabelowsingle
 
 def get_slabelow():
@@ -114,6 +114,7 @@ def get_ypointpeak():
     for i in ypointarray:
         if ypointpeak <= ypointarray[controlvar]:
             ypointpeak = ypointarray[controlvar]
+            print('ypointpeak:' + str(ypointpeak))
         controlvar = controlvar + 1
     return ypointpeak
 
@@ -124,6 +125,7 @@ def get_ypointspike():
     for i in ypointarray:
         if ypointspike >= ypointarray[controlvar]:
             ypointspike = ypointarray[controlvar]
+            print('ypointspike:' + str(ypointspike))
         controlvar = controlvar + 1
     return ypointspike
 
