@@ -69,8 +69,12 @@
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="Let_s_Datacentre_Monitoring_NEXT\" />
+    <Folder Include="Let_s_Datacentre_Monitoring_NEXT\app\" />
+    <Folder Include="Let_s_Datacentre_Monitoring_NEXT\app\utils\" />
+    <Folder Include="Let_s_Datacentre_Monitoring_NEXT\utils\" />
     <Folder Include="static\" />
     <Folder Include="static\utils\" />
+    <Folder Include="utils\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\fipydeletion.html" />
@@ -82,6 +86,8 @@
     <Content Include="app\templates\app\statisticsobservation.html" />
     <Content Include="app\sound\curious.wav" />
     <Content Include="app\utils\wkhtmltopdf.exe" />
+    <Content Include="Let_s_Datacentre_Monitoring_NEXT\app\utils\wkhtmltopdf.exe" />
+    <Content Include="Let_s_Datacentre_Monitoring_NEXT\utils\wkhtmltopdf.exe" />
     <Content Include="libman.json" />
     <Content Include="readme.txt" />
     <Content Include="requirements.txt" />
@@ -116,6 +122,7 @@
     <Content Include="app\templates\app\loginpartial.html" />
     <Content Include="static\utils\wkhtmltopdf.exe" />
     <Content Include="static\web.config" />
+    <Content Include="utils\wkhtmltopdf.exe" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
