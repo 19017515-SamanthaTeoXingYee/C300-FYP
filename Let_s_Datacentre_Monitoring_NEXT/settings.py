@@ -86,10 +86,21 @@ WSGI_APPLICATION = 'Let_s_Datacentre_Monitoring_NEXT.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'mydb',
+        'USER': '19013836@myrp.edu.sg',
+        'PASSWORD': 'Password1',
+        'HOST': 'fypdatabaseserverproj.database.windows.net',
+        'PORT': '1433',
+
+        'OPTIONS': {
+            'driver': 'ODBC Driver 13 for SQL Server',
+        },
+    },
 }
+
+# set this to False if you want to turn off pyodbc's connection pooling
+DATABASE_CONNECTION_POOLING = False
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -131,3 +142,4 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'c300fyp0090@gmail.com'
 EMAIL_HOST_PASSWORD = 'ef_Q$8L@(5gHQ"dD'
+

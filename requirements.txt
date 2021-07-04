@@ -3,5 +3,6 @@ matplotlib
 playsound
 seaborn
 pdfkit
-pyodbc
 whitenoise
+pyodbc
+django-azure-sql-backend

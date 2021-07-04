@@ -1,5 +1,5 @@
 {
   "TestFramework": "Pytest",
-  "Interpreter": "Workspace|Workspace|env1",
-  "SuppressConfigureTestFrameworkPrompt": "true"
+  "SuppressConfigureTestFrameworkPrompt": "true",
+  "Interpreter": "env\\Scripts\\python.exe"
 }
