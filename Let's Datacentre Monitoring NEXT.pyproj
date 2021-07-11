@@ -57,7 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
+    <Folder Include="app\assets\app\" />
+    <Folder Include="app\assets\app\util2\" />
     <Folder Include="app\migrations\" />
+    <Folder Include="app\assets\" />
     <Folder Include="app\static\app\util2\" />
     <Folder Include="app\static\app\utils\" />
     <Folder Include="app\temp\" />
@@ -76,6 +79,7 @@
     <Folder Include="util2\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\assets\app\util2\wkhtmltopdf.exe" />
     <Content Include="app\static\app\util2\wkhtmltopdf.exe" />
     <Content Include="app\static\app\utils\wkhtmltopdf.exe" />
     <Content Include="app\templates\app\fipydeletion.html" />

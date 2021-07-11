@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mssql',
 ]
 
 # Middleware framework
@@ -86,17 +87,9 @@ WSGI_APPLICATION = 'Let_s_Datacentre_Monitoring_NEXT.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'mydb',
-        'USER': '19013836@myrp.edu.sg',
-        'PASSWORD': 'Password1',
-        'HOST': 'fypdatabaseserverproj.database.windows.net',
-        'PORT': '1433',
-
-        'OPTIONS': {
-            'driver': 'ODBC Driver 13 for SQL Server',
-        },
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))
+    }
 }
 
 # set this to False if you want to turn off pyodbc's connection pooling
@@ -131,7 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = os.environ.get("DJANGO_STATIC_URL", "/static/")
 # STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
-STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", "./static/") 
+STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT", "./assets/") 
 
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 

@@ -2,8 +2,9 @@ import matplotlib.pyplot as plt
 plt.style.use('seaborn-whitegrid')
 import numpy as np
 import base64
-import random
+import os
 import pdfkit
+import random
 from django.conf import settings
 from django.core.mail import send_mail
 from django.http import HttpResponse
@@ -29,7 +30,10 @@ def filename():
     return filename
 
 def generatepdf():    
-    config = pdfkit.configuration(wkhtmltopdf= str(settings.BASE_DIR) + '/app/util2/wkhtmltopdf.exe')
+    print(str(settings.STATIC_URL))
+    #pathtofile = os.path.join(str(settings.BASE_DIR), "app", "util2", "wkhtmltopdf.exe")
+    pathtofile = settings.STATIC_URL + 'app/util2/wkhtmltopdf.exe'
+    config = pdfkit.configuration(wkhtmltopdf= pathtofile)
     html = f"""
         <!DOCTYPE html>
     <html>

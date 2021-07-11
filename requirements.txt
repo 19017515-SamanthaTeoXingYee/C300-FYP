@@ -5,4 +5,4 @@ seaborn
 pdfkit
 whitenoise
 pyodbc
-django-azure-sql-backend
+mssql-django
