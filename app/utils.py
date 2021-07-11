@@ -32,7 +32,7 @@ def filename():
 def generatepdf():    
     print(str(settings.STATIC_URL))
     #pathtofile = os.path.join(str(settings.BASE_DIR), "app", "util2", "wkhtmltopdf.exe")
-    pathtofile = settings.STATIC_URL + 'app/util2/wkhtmltopdf.exe'
+    pathtofile = settings.STATIC_ROOT + 'app/util2/wkhtmltopdf.exe'
     config = pdfkit.configuration(wkhtmltopdf= pathtofile)
     html = f"""
         <!DOCTYPE html>
