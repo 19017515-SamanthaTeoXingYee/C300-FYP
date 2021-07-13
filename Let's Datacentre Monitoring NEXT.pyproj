@@ -79,7 +79,9 @@
     <Folder Include="util2\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\assets\app\util2\wkhtmltopdf.exe" />
+    <Content Include="app\assets\app\util2\wkhtmltopdf.exe">
+      <Publish>True</Publish>
+    </Content>
     <Content Include="app\static\app\util2\wkhtmltopdf.exe" />
     <Content Include="app\static\app\utils\wkhtmltopdf.exe" />
     <Content Include="app\templates\app\fipydeletion.html" />
@@ -90,7 +92,9 @@
     <Content Include="app\templates\app\loggedoff.html" />
     <Content Include="app\templates\app\statisticsobservation.html" />
     <Content Include="app\sound\curious.wav" />
-    <Content Include="app\util2\wkhtmltopdf.exe" />
+    <Content Include="app\util2\wkhtmltopdf.exe">
+      <Publish>True</Publish>
+    </Content>
     <Content Include="libman.json" />
     <Content Include="readme.txt" />
     <Content Include="requirements.txt" />
@@ -123,9 +127,13 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
-    <Content Include="static\util2\wkhtmltopdf.exe" />
+    <Content Include="static\util2\wkhtmltopdf.exe">
+      <Publish>True</Publish>
+    </Content>
     <Content Include="static\web.config" />
-    <Content Include="util2\wkhtmltopdf.exe" />
+    <Content Include="util2\wkhtmltopdf.exe">
+      <Publish>True</Publish>
+    </Content>
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
