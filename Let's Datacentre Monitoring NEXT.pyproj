@@ -84,6 +84,7 @@
     </Content>
     <Content Include="app\static\app\util2\wkhtmltopdf.exe" />
     <Content Include="app\static\app\utils\wkhtmltopdf.exe" />
+    <Content Include="app\templates\app\base.html" />
     <Content Include="app\templates\app\fipydeletion.html" />
     <Content Include="app\templates\app\fipyaddition.html" />
     <Content Include="app\templates\app\fipyslaoperation.html" />
@@ -92,6 +93,7 @@
     <Content Include="app\templates\app\loggedoff.html" />
     <Content Include="app\templates\app\statisticsobservation.html" />
     <Content Include="app\sound\curious.wav" />
+    <Content Include="app\templates\app\user_printer.html" />
     <Content Include="app\util2\wkhtmltopdf.exe">
       <Publish>True</Publish>
     </Content>

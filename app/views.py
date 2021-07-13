@@ -171,9 +171,7 @@ def reportprinting():
 @login_required(login_url='/login/')
 def reportprint(request):
     filename = 'ldmreport' + currentdate() + '-' + currenttime()
-    pdf = generatepdf()
-    response = HttpResponse(pdf, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="' + filename + '.pdf"'
+    response = generatepdf()
     kininarimasu()
     return response
 

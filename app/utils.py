@@ -5,13 +5,15 @@ import base64
 import os
 import pdfkit
 import random
+from app import views
+from datetime import datetime
 from django.conf import settings
 from django.core.mail import send_mail
 from django.http import HttpResponse
-from playsound import playsound
+from django.template.loader import get_template
 from io import BytesIO
-from datetime import datetime
-from app import views
+from playsound import playsound
+from xhtml2pdf import pisa
 
 def currentdate():
     currentdate = str(datetime.now().year) + '-' + str(datetime.now().month) + '-' + str(datetime.now().day)
@@ -29,13 +31,10 @@ def filename():
     filename = 'ldmreport' + currentdate() + '-' + currenttime()
     return filename
 
-def generatepdf():    
-    print(str(settings.STATIC_URL))
-    #pathtofile = os.path.join(str(settings.BASE_DIR), "app", "util2", "wkhtmltopdf.exe")
-    pathtofile = settings.STATIC_ROOT + 'app/util2/wkhtmltopdf.exe'
-    config = pdfkit.configuration(wkhtmltopdf= pathtofile)
-    html = f"""
-        <!DOCTYPE html>
+def generatepdf():
+    pisa.showLogging()
+    source_html = f"""
+    <!DOCTYPE html>
     <html>
     <head>
     <meta charset = "utf-8">
@@ -58,8 +57,14 @@ def generatepdf():
     </body>
     </html> 
     """
-    pdf = pdfkit.from_string(html, False, configuration=config)
-    return pdf
+    filename = 'ldmreport' + currentdate() + '-' + currenttime()
+    output_filename = "test.pdf"
+    response = HttpResponse(content_type='application/pdf')
+    pisa_status = pisa.CreatePDF(source_html,dest=response)
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '.pdf"'
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 def get_graphwithbase64():
     buffer = BytesIO()
