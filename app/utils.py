@@ -12,7 +12,6 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.template.loader import get_template
 from io import BytesIO
-from playsound import playsound
 from xhtml2pdf import pisa
 
 def currentdate():
@@ -166,9 +165,6 @@ def get_plot(x,y):
 
     graph = get_graphwithbase64()
     return graph
-
-def kininarimasu():
-    playsound(str(settings.BASE_DIR) + "/app/sound/curious.wav")
 
 def get_emails():
     emails = ['19045168@myrp.edu.sg',]

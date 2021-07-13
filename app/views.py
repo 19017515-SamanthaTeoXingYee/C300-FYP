@@ -17,7 +17,6 @@ from django.http import HttpRequest
 from django.http import HttpResponse
 from .models import App
 from .utils import get_plot
-from .utils import kininarimasu
 from .utils import generatepdf
 from .utils import currentdate
 from .utils import currenttime
@@ -166,12 +165,10 @@ def reportprinting():
             'year':datetime.now().year,
         }
     )
-    kininarimasu()
 
 @login_required(login_url='/login/')
 def reportprint(request):
     filename = 'ldmreport' + currentdate() + '-' + currenttime()
     response = generatepdf()
-    kininarimasu()
     return response
 
