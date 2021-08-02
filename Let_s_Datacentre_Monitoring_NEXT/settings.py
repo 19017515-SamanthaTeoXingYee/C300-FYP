@@ -87,9 +87,16 @@ WSGI_APPLICATION = 'Let_s_Datacentre_Monitoring_NEXT.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))
-    }
+        'ENGINE': 'mssql',
+        'NAME': 'fypproject',
+        'USER': 'student',
+        'PASSWORD': 'Password1',
+        'HOST': 'fypdatabaseserverproj.database.windows.net',
+        'PORT': 1433,
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+            }
+        },
 }
 
 # set this to False if you want to turn off pyodbc's connection pooling

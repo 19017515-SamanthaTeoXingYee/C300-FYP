@@ -58,18 +58,14 @@
   <ItemGroup>
     <Folder Include="app\" />
     <Folder Include="app\assets\app\" />
-    <Folder Include="app\assets\app\util2\" />
     <Folder Include="app\migrations\" />
     <Folder Include="app\assets\" />
-    <Folder Include="app\static\app\util2\" />
-    <Folder Include="app\static\app\utils\" />
     <Folder Include="app\temp\" />
     <Folder Include="app\sound\" />
     <Folder Include="app\static\" />
     <Folder Include="app\static\app\" />
     <Folder Include="app\static\app\content\" />
     <Folder Include="app\static\app\fonts\" />
-    <Folder Include="app\util2\" />
     <Folder Include="app\static\app\scripts\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
@@ -79,11 +75,6 @@
     <Folder Include="util2\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\assets\app\util2\wkhtmltopdf.exe">
-      <Publish>True</Publish>
-    </Content>
-    <Content Include="app\static\app\util2\wkhtmltopdf.exe" />
-    <Content Include="app\static\app\utils\wkhtmltopdf.exe" />
     <Content Include="app\templates\app\base.html" />
     <Content Include="app\templates\app\fipydeletion.html" />
     <Content Include="app\templates\app\fipyaddition.html" />
@@ -94,9 +85,6 @@
     <Content Include="app\templates\app\statisticsobservation.html" />
     <Content Include="app\sound\curious.wav" />
     <Content Include="app\templates\app\user_printer.html" />
-    <Content Include="app\util2\wkhtmltopdf.exe">
-      <Publish>True</Publish>
-    </Content>
     <Content Include="libman.json" />
     <Content Include="readme.txt" />
     <Content Include="requirements.txt" />
