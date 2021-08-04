@@ -13,6 +13,12 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from io import BytesIO
 from xhtml2pdf import pisa
+from app import models 
+from .models import DataCentre
+from .models import Customer
+from .models import IOT_devices
+from .models import StoreData
+from .models import Test3
 
 def currentdate():
     currentdate = str(datetime.now().year) + '-' + str(datetime.now().month) + '-' + str(datetime.now().day)
@@ -81,7 +87,7 @@ def get_graph():
     return graph
 
 def get_slaabovesingle():
-    slaabovesingle = 24
+    slaabovesingle = max_temperature # change this value to not a hard-coded one (the maximum value user specifies)
     return slaabovesingle
 
 def get_slaabove():
@@ -90,7 +96,7 @@ def get_slaabove():
     return slaabove
 
 def get_slabelowsingle():
-    slabelowsingle = 20
+    slabelowsingle = min_temperature # change this value to not a hard-coded one (the minimum value user specifies)
     return slabelowsingle
 
 def get_slabelow():
@@ -99,19 +105,25 @@ def get_slabelow():
     return slabelow
 
 def get_xpoints():
-    xpoints = np.array([20.0, 15.0, 10.0, 5.0, 0.0])
-    return xpoints
+    xpoint1 = Test3.objects.raw('SELECT EventProcessedUtcTime FROM Test3')[4]
+    xpoint2 = Test3.objects.raw('SELECT EventProcessedUtcTime FROM Test3')[3]
+    xpoint3 = Test3.objects.raw('SELECT EventProcessedUtcTime FROM Test3')[2]
+    xpoint4 = Test3.objects.raw('SELECT EventProcessedUtcTime FROM Test3')[1]
+    xpoint5 = Test3.objects.raw('SELECT EventProcessedUtcTime FROM Test3')[0]
+    xpointarray = np.array([xpoint1, xpoint2, xpoint3, xpoint4, xpoint5])
+    #ORDER BY EventProcessedUtcTime DESC LIMIT 5'
+    return xpointarray
 
 def get_humidity():
-    humidity = str(round(random.uniform(38, 42),1))
+    humidity = fypproject.objects.raw('SELECT humidity FROM app_StoreData')
     return humidity
 
 def get_ypoints():
-    ypoint1 = round(random.uniform(20.1, 23.9), 1)
-    ypoint2 = round(random.uniform(20.1, 23.9), 1)
-    ypoint3 = round(random.uniform(20.1, 23.9), 1)
-    ypoint4 = round(random.uniform(20.1, 23.9), 1)
-    ypoint5 = round(random.uniform(20.1, 23.9), 1)
+    ypoint1 = Test3.objects.raw('SELECT payload FROM Test3')[4]  #change these values to the last 5 entries of the database
+    ypoint2 = Test3.objects.raw('SELECT payload FROM Test3')[3]
+    ypoint3 = Test3.objects.raw('SELECT payload FROM Test3')[2]
+    ypoint4 = Test3.objects.raw('SELECT payload FROM Test3')[1]
+    ypoint5 = Test3.objects.raw('SELECT payload FROM Test3')[0]
     ypointarray = np.array([ypoint1, ypoint2, ypoint3, ypoint4, ypoint5])
     return ypointarray
 
@@ -161,13 +173,13 @@ def get_plot(x,y):
     plt.ylabel('Temperature')
 
     plt.xlim(20, 0)
-    plt.ylim(18, 26);
+    plt.ylim(10, 31); #change this to the range the user can input
 
     graph = get_graphwithbase64()
     return graph
 
 def get_emails():
-    emails = ['19045168@myrp.edu.sg',]
+    emails = fypproject.objects.raw('SELECT email FROM Customer')
     return emails
 
 def send_email():
