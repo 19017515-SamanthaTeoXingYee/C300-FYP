@@ -1,0 +1,14 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2>Let's! {{ title }}</h2>
+<h3>{{ message }}</h3>
+
+<form action="/fipyaddoperation/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

@@ -5,6 +5,7 @@ import os
 import pdfkit
 
 from django.core.exceptions import PermissionDenied
+from django.db import connection
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template.loader import get_template
@@ -28,6 +29,7 @@ from .utils import get_ypointspike
 from .utils import get_slaabovesingle
 from .utils import get_slabelowsingle
 from .utils import send_email
+from .forms import SLAManagementForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -101,27 +103,63 @@ def statisticsobservation(request):
 
 @login_required(login_url='/login/')
 def slamanagement(request):
+    form = SLAManagementForm()
     if request.method == 'POST':
         form = SLAManagementForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('/fipyslaoperation/')
-    else:
-        form = SLAManagementForm()
-    return render(request, 'slamanagement.html', {'form': form})
+    context = {'form':form}
+    return render(request, 'app/slamanagement.html', context)
 
 @login_required(login_url='/login/')
-def fipyslaoperation(request):
-    """Renders the Fipy/SLA Operation page."""
-    assert isinstance(request, HttpRequest)
+def slaoperation(request):
+    """Renders the SLA Operation page."""
+    if request.method == 'POST':
+        form = SLAManagementForm(request.POST)
+    if form.is_valid():
+        minimumSLA = form.cleaned_data.get('minimumSLA')
+        maximumSLA = form.cleaned_data.get('maximumSLA')
+        with connection.cursor() as cursor:
+            cursor.execute("UPDATE DataCentre SET min_temperature = " + str(minimumSLA) + "WHERE DataCentre_id = 4")
+            cursor.execute("UPDATE DataCentre SET max_temperature = " + str(maximumSLA) + "WHERE DataCentre_id = 4")
+        context = {'form':form}
     return render(
         request,
-        'app/fipyslaoperation.html',
+        'app/slaoperation.html',
         {
-            'title':'Fipy or SLA Operation',
-            'message':'Successful Fipy or SLA Operation!',
+            'title':'SLA Operation',
+            'message':'Successful SLA Operation!',
             'year':datetime.now().year,
         }
     )
+
+#@login_required(login_url='/login/')
+#def fipyaddition(request):
+#    form = FipyAdditionForm()
+#    if request.method == 'POST':
+#        form = FipyAdditionForm(request.POST)
+#    context = {'form':form}
+#    return render(request, 'app/fipyaddoperation.html', context)
+#
+#@login_required(login_url='/login/')
+#def fipyaddoperation(request):
+#    """Renders the SLA Operation page."""
+#    if request.method == 'POST':
+#        form = SLAManagementForm(request.POST)
+#    if form.is_valid():
+#        minimumSLA = form.cleaned_data.get('minimumSLA')
+#        maximumSLA = form.cleaned_data.get('maximumSLA')
+#        with connection.cursor() as cursor:
+#            cursor.execute("UPDATE DataCentre SET min_temperature = " + str(minimumSLA) + "WHERE DataCentre_id = 4")
+#            cursor.execute("UPDATE DataCentre SET max_temperature = " + str(maximumSLA) + "WHERE DataCentre_id = 4")
+#        context = {'form':form}
+#    return render(
+#        request,
+#        'app/fipyaddoperation.html',
+#        {
+#            'title':'Fipy Operation',
+#            'message':'Successful Fipy Operation!',
+#            'year':datetime.now().year,
+#        }
+#    )
 
 def reportprinting():
     assert isinstance(request, HttpRequest)

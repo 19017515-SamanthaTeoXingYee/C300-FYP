@@ -16,7 +16,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
     path('slamanagement/', views.slamanagement, name='slamanagement'),
-    path('fipyslaoperation/', views.fipyslaoperation, name='fipyslaoperation'),
+    path('slaoperation/', views.slaoperation, name='slaoperation'),
     path('statisticsobservation/', views.statisticsobservation, name='statisticsobservation'),
     path('reportprint/', views.reportprint, name='reportprint'),
     path('login/',

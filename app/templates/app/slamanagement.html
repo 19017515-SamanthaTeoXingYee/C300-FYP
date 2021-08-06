@@ -6,11 +6,9 @@
 <h3>{{ message }}</h3>
 
 <form action="/slaoperation/" method="post">
-    <label for="minimum_sla">Minimum SLA Level: </label>
-<label for="maximum_sla">Maximum SLA Level: </label>
-    <input id="minimum_sla" type="text" name="minimum_sla" value="Minimum SLA Level...">
-<input id="maximum_sla" type="text" name="maximum_sla" value="Maximum SLA Level...">
-    <input type="submit" value="OK">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
 </form>
 
 {% endblock %}

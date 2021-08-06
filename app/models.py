@@ -155,3 +155,12 @@ class Test3(models.Model):
 
     def __str__(self):
         return self.payload
+
+class MinMaxSLA(models.Model):
+    minimumSLA = models.IntegerField(max_length=2)
+    maximumSLA = models.IntegerField(max_length=2)
+
+class AddFipy(models.Model):
+    deviceId = models.Field(max_length=2)
+    name = models.IntegerField(max_length=2)
+    description = models.IntegerField(max_length=2)

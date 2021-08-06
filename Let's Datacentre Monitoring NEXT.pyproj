@@ -76,6 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\base.html" />
+    <Content Include="app\templates\app\fipyadd.html" />
+    <Content Include="app\templates\app\sla.html" />
+    <Content Include="app\templates\app\fipyaddoperation.html" />
+    <Content Include="app\templates\app\fipyaddmanagement.html" />
     <Content Include="app\templates\app\slaoperation.html" />
     <Content Include="app\templates\app\reportprint.html" />
     <Content Include="app\templates\app\slamanagement.html" />
