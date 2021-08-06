@@ -112,6 +112,7 @@ class DataCentre(models.Model):
         (30, '30'),
         (31, '31'), 
     )
+    DataCentre_id = models.IntegerField(max_length=4, primary_key=True)
     name = models.CharField(max_length=30)
     address = models.CharField(max_length=30)
     postal_code = models.IntegerField(max_length=6)
@@ -125,6 +126,7 @@ class DataCentre(models.Model):
         return self.max_temperature
 
 class Customer(models.Model):
+    customer_id = models.IntegerField(max_length=4, primary_key=True)
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     full_name = models.CharField(max_length=30)
@@ -133,8 +135,11 @@ class Customer(models.Model):
     home_number = models.IntegerField(max_length=8)
     address = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.email
+
 class IOT_devices(models.Model):
-    device = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    device = models.ForeignKey(Customer, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=30)
 
@@ -145,4 +150,7 @@ class StoreData(models.Model):
 class Test3(models.Model):
     signal = models.IntegerField()
     payload = models.FloatField()
-    EventProcessedUtcTime = models.DateTimeField()
+    EventProcessedUtcTime = models.DateTimeField(primary_key=True)
+
+    def __str__(self):
+        return self.payload

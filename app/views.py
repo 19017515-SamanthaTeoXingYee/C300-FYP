@@ -46,7 +46,7 @@ def home(request):
         'app/index.html',
         {
             'title':'Welcome',
-            # 'year':datetime.now().year,
+            'year':datetime.now().year,
         }
     )
 

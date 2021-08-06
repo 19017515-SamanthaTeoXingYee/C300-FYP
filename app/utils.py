@@ -87,7 +87,7 @@ def get_graph():
     return graph
 
 def get_slaabovesingle():
-    slaabovesingle = max_temperature # change this value to not a hard-coded one (the maximum value user specifies)
+    slaabovesingle = (DataCentre.objects.raw('SELECT max_temperature, DataCentre_id FROM DataCentre')[0]).max_temperature
     return slaabovesingle
 
 def get_slaabove():
@@ -96,7 +96,7 @@ def get_slaabove():
     return slaabove
 
 def get_slabelowsingle():
-    slabelowsingle = min_temperature # change this value to not a hard-coded one (the minimum value user specifies)
+    slabelowsingle = (DataCentre.objects.raw('SELECT min_temperature, DataCentre_id FROM DataCentre')[0]).min_temperature
     return slabelowsingle
 
 def get_slabelow():
@@ -105,26 +105,25 @@ def get_slabelow():
     return slabelow
 
 def get_xpoints():
-    xpoint1 = Test3.objects.raw('SELECT EventProcessedUtcTime FROM Test3')[4]
-    xpoint2 = Test3.objects.raw('SELECT EventProcessedUtcTime FROM Test3')[3]
-    xpoint3 = Test3.objects.raw('SELECT EventProcessedUtcTime FROM Test3')[2]
-    xpoint4 = Test3.objects.raw('SELECT EventProcessedUtcTime FROM Test3')[1]
-    xpoint5 = Test3.objects.raw('SELECT EventProcessedUtcTime FROM Test3')[0]
+    xpoint1 = 40
+    xpoint2 = 30
+    xpoint3 = 20
+    xpoint4 = 10
+    xpoint5 = 0
     xpointarray = np.array([xpoint1, xpoint2, xpoint3, xpoint4, xpoint5])
-    #ORDER BY EventProcessedUtcTime DESC LIMIT 5'
     return xpointarray
 
 def get_humidity():
-    humidity = fypproject.objects.raw('SELECT humidity FROM app_StoreData')
+    humidity = StoreData.objects.raw('SELECT humidity FROM app_StoreData')
     return humidity
 
 def get_ypoints():
-    ypoint1 = Test3.objects.raw('SELECT payload FROM Test3')[4]  #change these values to the last 5 entries of the database
-    ypoint2 = Test3.objects.raw('SELECT payload FROM Test3')[3]
-    ypoint3 = Test3.objects.raw('SELECT payload FROM Test3')[2]
-    ypoint4 = Test3.objects.raw('SELECT payload FROM Test3')[1]
-    ypoint5 = Test3.objects.raw('SELECT payload FROM Test3')[0]
-    ypointarray = np.array([ypoint1, ypoint2, ypoint3, ypoint4, ypoint5])
+    ypoint1 = Test3.objects.raw('SELECT payload, EventProcessedUtcTime FROM Test3')[4]
+    ypoint2 = Test3.objects.raw('SELECT payload, EventProcessedUtcTime FROM Test3')[3]
+    ypoint3 = Test3.objects.raw('SELECT payload, EventProcessedUtcTime FROM Test3')[2]
+    ypoint4 = Test3.objects.raw('SELECT payload, EventProcessedUtcTime FROM Test3')[1]
+    ypoint5 = Test3.objects.raw('SELECT payload, EventProcessedUtcTime FROM Test3')[0]
+    ypointarray = np.array([ypoint1.payload, ypoint2.payload, ypoint3.payload, ypoint4.payload, ypoint5.payload])
     return ypointarray
 
 def get_ypointpeak():
@@ -179,7 +178,10 @@ def get_plot(x,y):
     return graph
 
 def get_emails():
-    emails = fypproject.objects.raw('SELECT email FROM Customer')
+    emails = []
+    for p in Customer.objects.raw('SELECT email, customer_id FROM Customer'):
+        theEmail = p.email
+    emails.append(theEmail)
     return emails
 
 def send_email():
