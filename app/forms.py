@@ -25,7 +25,7 @@ class SLAManagementForm(ModelForm):
         model = MinMaxSLA
         fields = '__all__'
 
-class FipyAdditionForm(ModelForm):
-    class Meta:
-        model = AddFipy
-        fields = '__all__'
+#class FipyAdditionForm(ModelForm):
+#    class Meta:
+#        model = AddFipy
+#        fields = '__all__'
