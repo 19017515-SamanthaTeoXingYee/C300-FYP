@@ -146,6 +146,7 @@ class IOT_devices(models.Model):
 class StoreData(models.Model):
     temperature = models.FloatField(max_length=5)
     humidity = models.FloatField(max_length=5)
+    id = models.IntegerField(max_length=10, primary_key=True)
 
 class Test3(models.Model):
     signal = models.IntegerField()

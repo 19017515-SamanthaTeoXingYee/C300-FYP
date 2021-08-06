@@ -18,13 +18,13 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                    'placeholder':'Password'}))
 
 
-class BootstrapFipyAdditionForm(AuthenticationForm):
+class SLAManagementForm(forms.Form):
     """Authentication form which uses boostrap CSS."""
-    deviceid = forms.CharField(max_length=6,
+    min_temperature = forms.CharField(label='Minimum Temperature', max_length=2,
                                widget=forms.TextInput({
                                    'class': 'form-control',
-                                   'placeholder': 'Device ID...'}))
-    devicename = forms.CharField(label=_("Device Name..."),
+                                   'placeholder': 'Minimum Temperature...'}))
+    max_temperature = forms.CharField(label='Maximum Temperature', max_length=2,
                                widget=forms.TextInput({
                                    'class': 'form-control',
-                                   'placeholder':'Name your device...'}))
+                                   'placeholder':'Maximum temperature...'}))

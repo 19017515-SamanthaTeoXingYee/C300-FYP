@@ -50,13 +50,13 @@ def generatepdf():
     <p>This is the report for your datacentre. This information is accurate as at """ + currentdate() + """ at """ + currenttime() + """.</p>
     <br>
     <p>The temperature reported for Fipy 1 is """ + get_latestypoint() + """.</p>
-    <p>The humidity for Fipy 1 is <bold> """ + get_humidity() + """ </bold>.
+    <p>The humidity for Fipy 1 is <bold> """ + str(get_humidity()) + """ </bold>.
     <br>
     <p>The current minimum temperature, as per the SLA, is """ + str(get_slabelowsingle()) + """.</p>
     <p>The current maximum temperature, as per the SLA, is """ + str(get_slaabovesingle()) + """ </p>
     <br>
     <footer>
-    <p>&copy; """ + currentyear() + """ - Let's! Datacentre Monitoring</p>
+    <p>&copy; """ + str(currentyear()) + """ - Let's! Datacentre Monitoring</p>
     </footer>
     <br>
     </body>
@@ -105,25 +105,23 @@ def get_slabelow():
     return slabelow
 
 def get_xpoints():
-    xpoint1 = 40
-    xpoint2 = 30
-    xpoint3 = 20
-    xpoint4 = 10
+    xpoint1 = 60
+    xpoint2 = 45
+    xpoint3 = 30
+    xpoint4 = 15
     xpoint5 = 0
     xpointarray = np.array([xpoint1, xpoint2, xpoint3, xpoint4, xpoint5])
     return xpointarray
 
 def get_humidity():
-    humidity = StoreData.objects.raw('SELECT humidity FROM app_StoreData')
+    humidity = round(((StoreData.objects.raw('SELECT TOP 1 humidity, id FROM StoreData ORDER BY id DESC')[0]).humidity),2)
     return humidity
 
 def get_ypoints():
-    ypoint1 = Test3.objects.raw('SELECT payload, EventProcessedUtcTime FROM Test3')[4]
-    ypoint2 = Test3.objects.raw('SELECT payload, EventProcessedUtcTime FROM Test3')[3]
-    ypoint3 = Test3.objects.raw('SELECT payload, EventProcessedUtcTime FROM Test3')[2]
-    ypoint4 = Test3.objects.raw('SELECT payload, EventProcessedUtcTime FROM Test3')[1]
-    ypoint5 = Test3.objects.raw('SELECT payload, EventProcessedUtcTime FROM Test3')[0]
-    ypointarray = np.array([ypoint1.payload, ypoint2.payload, ypoint3.payload, ypoint4.payload, ypoint5.payload])
+    ypointarray = []
+    for p in StoreData.objects.raw('SELECT TOP 5 temperature, id FROM StoreData ORDER BY id DESC'):
+        theTemperature = round(p.temperature,2)
+        ypointarray.append(theTemperature)
     return ypointarray
 
 def get_ypointpeak():
@@ -164,15 +162,15 @@ def get_plot(x,y):
 
     x = np.linspace(0, 10, 1000)
     plt.plot(get_xpoints(), get_ypoints(), 'o-b')
-    plt.plot(get_xpoints(), get_slabelow(),'o:r')
     plt.plot(get_xpoints(), get_slaabove(),'o:r')
+    plt.plot(get_xpoints(), get_slabelow(),'o:r')
 
     plt.title('Temperature of Datacentre')
     plt.xlabel('Time')
     plt.ylabel('Temperature')
 
-    plt.xlim(20, 0)
-    plt.ylim(10, 31); #change this to the range the user can input
+    plt.xlim(40, 0)
+    plt.ylim(0, 50)
 
     graph = get_graphwithbase64()
     return graph
@@ -181,12 +179,12 @@ def get_emails():
     emails = []
     for p in Customer.objects.raw('SELECT email, customer_id FROM Customer'):
         theEmail = p.email
-    emails.append(theEmail)
+        emails.append(theEmail)
     return emails
 
 def send_email():
     subject = 'Notice of Temperature Levels SLA Breach'
-    message = f'Dear User, based on the specified SLA levels of ' + str(get_slaabovesingle()) + ' and ' + str(get_slabelowsingle()) + ', we would like to inform you of the breach in your temperature levels being ' + get_latestypoint() + '. It is advised that you rectify this as soon as possible.'
+    message = f'Dear User, based on the specified SLA levels of ' + str(get_slabelowsingle()) + ' and ' + str(get_slaabovesingle()) + ' degrees, we would like to inform you of the breach in your temperature levels being ' + get_latestypoint() + '. It is advised that you rectify this as soon as possible.'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = get_emails()
     send_mail(subject, message, email_from, recipient_list )

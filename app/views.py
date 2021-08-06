@@ -5,7 +5,7 @@ import os
 import pdfkit
 
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template.loader import get_template
 from django.template.loader import render_to_string
@@ -15,6 +15,7 @@ from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponse
+from .forms import SLAManagementForm
 from .models import App
 from .utils import get_plot
 from .utils import generatepdf
@@ -100,45 +101,13 @@ def statisticsobservation(request):
 
 @login_required(login_url='/login/')
 def slamanagement(request):
-    """Renders the SLA Management page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/slamanagement.html',
-        {
-            'title':'SLA Management',
-            'message':'Set the SLA for the device!',
-            'year':datetime.now().year,
-        }
-    )
-
-@login_required(login_url='/login/')
-def fipyaddition(request):
-    """Renders the Fipy Addition page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/fipyaddition.html',
-        {
-            'title':'Fipy Addition',
-            'message':'Add Fipy devices!',
-            'year':datetime.now().year,
-        }
-    )
-
-@login_required(login_url='/login/')
-def fipydeletion(request):
-    """Renders the Fipy Deletion page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/fipydeletion.html',
-        {
-            'title':'Fipy Deletion',
-            'message':'Delete Fipy devices!',
-            'year':datetime.now().year,
-        }
-    )
+    if request.method == 'POST':
+        form = SLAManagementForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/fipyslaoperation/')
+    else:
+        form = SLAManagementForm()
+    return render(request, 'slamanagement.html', {'form': form})
 
 @login_required(login_url='/login/')
 def fipyslaoperation(request):
@@ -171,4 +140,3 @@ def reportprint(request):
     filename = 'ldmreport' + currentdate() + '-' + currenttime()
     response = generatepdf()
     return response
-

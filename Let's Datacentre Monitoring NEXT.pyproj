@@ -76,9 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\base.html" />
-    <Content Include="app\templates\app\fipydeletion.html" />
-    <Content Include="app\templates\app\fipyaddition.html" />
-    <Content Include="app\templates\app\fipyslaoperation.html" />
+    <Content Include="app\templates\app\slaoperation.html" />
     <Content Include="app\templates\app\reportprint.html" />
     <Content Include="app\templates\app\slamanagement.html" />
     <Content Include="app\templates\app\loggedoff.html" />
